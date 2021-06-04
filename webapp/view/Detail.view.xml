@@ -1,0 +1,110 @@
+<mvc:View controllerName="smartform.controller.Detail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
+	xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:smartTable="sap.ui.comp.smarttable" xmlns:core="sap.ui.core" xmlns:f="sap.f"
+	xmlns:smartField="sap.ui.comp.smartfield" xmlns:smartform="sap.ui.comp.smartform"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<f:DynamicPage toggleHeaderOnTitleClick="true" showFooter="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Sales Orders"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader pinnable="true">
+				<f:content>
+					
+					<smartTable:SmartTable id="idSalesOrderTable" tableType="ResponsiveTable" entitySet="SalesOrderLineItemSet" useExportToExcel="true"
+						enableAutoBinding="false" showTablePersonalisation="true" useTablePersonalisation="true" useVariantManagement="true"
+						enableCustomFilter="false" beforeRebindTable="handlebeforeRebindTable">
+						<Table mode="SingleSelectMaster" selectionChange="onSelectionChange">
+							<columns>
+								<Column>
+									<customData>
+										<core:CustomData key="p13nData" value='\{"columnKey": "SalesOrderID", "leadingProperty": "SalesOrderID"}'/>
+									</customData>
+									<Label text="SalesOrderID"/>
+								</Column>
+								<Column>
+									<customData>
+										<core:CustomData key="p13nData" value='\{"columnKey": "ItemPosition", "leadingProperty": "ItemPosition"}'/>
+									</customData>
+									<Label text="ItemPosition"/>
+								</Column>
+								<Column>
+									<customData>
+										<core:CustomData key="p13nData" value='\{"columnKey": "Note", "leadingProperty": "Note"}'/>
+									</customData>
+									<Label text="Note"/>
+								</Column>
+								<Column>
+									<customData>
+										<core:CustomData key="p13nData" value='\{"columnKey": "NoteLanguage", "leadingProperty": "NoteLanguage"}'/>
+									</customData>
+									<Label text="NoteLanguage"/>
+								</Column>
+								<Column>
+									<customData>
+										<core:CustomData key="p13nData" value='\{"columnKey": "Quantity", "leadingProperty": "Quantity"}'/>
+									</customData>
+									<Label text="Quantity"/>
+								</Column>
+								<Column>
+									<customData>
+										<core:CustomData key="p13nData" value='\{"columnKey": "ProductID", "leadingProperty": "ProductID"}'/>
+									</customData>
+									<Label text="ProductID"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{SalesOrderID}"/>
+										<Text text="{ItemPosition}"/>
+										<Text text="{Note}"/>
+										<Text text="{NoteLanguage}"/>
+										<Text text="{Quantity}"/>
+										<Text text="{ProductID}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</smartTable:SmartTable>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<smartform:SmartForm editTogglable="true" editToggled="handleEditToggled" entityType="SalesOrderLineItem" id="salesOrder"
+				title="Sales Order Detail">
+				<smartform:customData>
+					<core:CustomData key="dateFormatSettings" value='\{"UTC":true,"style":"medium"\}'/>
+				</smartform:customData>
+				<smartform:Group>
+					<smartform:GroupElement>
+						<smartField:SmartField value="{NetAmount}" textLabel="NetAmount" editable="true"></smartField:SmartField>
+					</smartform:GroupElement>
+					<smartform:GroupElement>
+						<smartField:SmartField value="{CurrencyCode}" textLabel="CurrencyCode" editable="true"></smartField:SmartField>
+					</smartform:GroupElement>
+					<smartform:GroupElement>
+						<smartField:SmartField value="{GrossAmount}" textLabel="GrossAmount" editable="true"></smartField:SmartField>
+					</smartform:GroupElement>
+					<smartform:GroupElement>
+						<smartField:SmartField value="{DeliveryDate}" textLabel="DeliveryDate" editable="true">
+							<smartField:configuration>
+								<smartField:Configuration controlType="datePicker"/>
+							</smartField:configuration>
+						</smartField:SmartField>
+					</smartform:GroupElement>
+				</smartform:Group>
+			</smartform:SmartForm>
+		</f:content>
+		<f:footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button text="Save"/>
+			</Toolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>
